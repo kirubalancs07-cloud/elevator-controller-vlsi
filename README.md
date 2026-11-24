@@ -1,4 +1,4 @@
-# 4-Floor Elevator Controller — CLA2 VLSI Design Project
+# 4-Floor Elevator Controller CLA2 VLSI Design Project
 **Course:** 21ECC303TA – VLSI Design and Technology  
 **Assessment:** CLA-2 | Problem Statement 3  
 **Student:** Kirubalan | SRMIST Tiruchirappalli
