@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4-Floor Elevator Controller — VLSI CLA2</title>
+<style>
+  :root {
+    --bg: #0f172a; --surface: #1e293b; --border: #334155;
+    --car: #38bdf8; --car-border: #0369a1; --door: #fbbf24;
+    --text: #e2e8f0; --muted: #94a3b8;
+    --active: #f97316; --active-hover: #ea580c;
+    --green: #a3e635; --btn-off: #374151; --btn-off-hover: #4b5563;
+    --shaft: #162032; --floor-line: #263348;
+    --idle: #64748b; --move: #38bdf8; --doorcol: #fbbf24;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif;
+         display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+         padding: 20px; }
+  h1 { font-size: 1.1rem; color: var(--muted); margin-bottom: 18px; text-align: center; }
+
+  #main { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+
+  /* ---- Building ---- */
+  #building-wrap { display: flex; flex-direction: column; align-items: center; }
+  #building { position: relative; width: 260px; height: 440px;
+              background: var(--surface); border: 2px solid var(--border); border-radius: 8px;
+              overflow: hidden; }
+  .floor-row { position: absolute; left: 0; right: 0; border-top: 2px solid var(--floor-line);
+               display: flex; align-items: center; }
+  .floor-label { font-size: 0.85rem; font-weight: 700; color: var(--muted);
+                 padding-left: 8px; width: 36px; }
+  .shaft { position: absolute; right: 10px; width: 80px; top: 0; bottom: 0;
+           background: var(--shaft); border-left: 1px solid var(--border);
+           border-right: 1px solid var(--border); }
+
+  /* Car is an absolutely-positioned div inside #building */
+  #car { position: absolute; right: 16px; width: 68px;
+         background: var(--car); border: 2px solid var(--car-border);
+         border-radius: 4px; transition: top 0.18s linear;
+         display: flex; align-items: center; justify-content: center; }
+  #car-label { font-size: 0.75rem; font-weight: 700; color: #0c4a6e; }
+  #door-l, #door-r { position: absolute; top: 4px; bottom: 4px; width: 0;
+                     background: var(--door); border-radius: 2px;
+                     transition: width 0.25s ease; }
+  #door-l { left: 4px; }
+  #door-r { right: 4px; }
+
+  /* Floor indicator dots */
+  .floor-dots { display: flex; gap: 5px; position: absolute; left: 44px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+  .dot.cabin-on  { background: var(--active); }
+  .dot.up-on     { background: #34d399; }
+  .dot.down-on   { background: #f472b6; }
+
+  /* Status bar */
+  #status-bar { margin-top: 10px; background: var(--surface); border: 1px solid var(--border);
+                border-radius: 6px; padding: 8px 14px; width: 260px; font-size: 0.82rem; }
+  #status-bar span { color: var(--active); font-weight: 700; }
+  .state-idle { color: var(--idle) !important; }
+  .state-move { color: var(--move) !important; }
+  .state-door { color: var(--doorcol) !important; }
+
+  /* ---- Right panel ---- */
+  #controls { display: flex; flex-direction: column; gap: 18px; width: 220px; }
+
+  .panel-title { font-size: 0.75rem; font-weight: 700; letter-spacing: .08em;
+                 color: var(--muted); text-transform: uppercase; margin-bottom: 6px; }
+
+  /* Hall calls */
+  #hall-panel table { width: 100%; border-collapse: collapse; }
+  #hall-panel td { padding: 4px 3px; }
+  #hall-panel .fl-name { font-size: 0.85rem; color: var(--text); white-space: nowrap; }
+  .hall-btn { padding: 5px 10px; font-size: 1rem; cursor: pointer;
+              background: var(--btn-off); color: var(--text); border: 1px solid var(--border);
+              border-radius: 5px; transition: background .15s; }
+  .hall-btn:hover:not(:disabled) { background: var(--btn-off-hover); }
+  .hall-btn.pending { background: var(--active); color: #fff; border-color: var(--active-hover); }
+  .hall-btn:disabled { opacity: 0.25; cursor: default; }
+
+  /* Cabin panel */
+  #cabin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .cabin-btn { padding: 14px; font-size: 1.1rem; font-weight: 700; cursor: pointer;
+               background: var(--btn-off); color: var(--text); border: 1px solid var(--border);
+               border-radius: 6px; transition: background .15s; }
+  .cabin-btn:hover { background: var(--btn-off-hover); }
+  .cabin-btn.pending { background: var(--active); color: #fff; border-color: var(--active-hover); }
+
+  /* Speed */
+  #speed-wrap { display: flex; align-items: center; gap: 8px; }
+  #speed-wrap label { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+  #speed-slider { flex: 1; accent-color: var(--active); }
+
+  /* Log */
+  #log { background: #0a1120; border: 1px solid var(--border); border-radius: 6px;
+         height: 160px; overflow-y: auto; padding: 6px 8px; font-size: 0.78rem;
+         font-family: 'Consolas', monospace; }
+  #log p { color: var(--green); line-height: 1.5; border-bottom: 1px solid #1e2a3a; padding: 1px 0; }
+  #log p:last-child { border: none; }
+
+  /* Reset */
+  #reset-btn { padding: 8px; width: 100%; font-size: 0.85rem; font-weight: 700;
+               cursor: pointer; background: #1e293b; color: #f87171;
+               border: 1px solid #ef4444; border-radius: 6px; transition: background .15s; }
+  #reset-btn:hover { background: #3f1515; }
+</style>
+</head>
+<body>
+
+<h1>4-Floor Elevator Controller &nbsp;|&nbsp; VLSI CLA-2 &nbsp;|&nbsp; SCAN/LOOK Priority Scheduling</h1>
+
+<div id="main">
+
+  <!-- Building -->
+  <div id="building-wrap">
+    <div id="building">
+      <div class="shaft"></div>
+      <!-- floor rows inserted by JS -->
+      <!-- car -->
+      <div id="car">
+        <div id="door-l"></div>
+        <div id="door-r"></div>
+        <div id="car-label">▲▼</div>
+      </div>
+    </div>
+    <div id="status-bar">
+      Floor: <span id="s-floor">1</span> &nbsp;|&nbsp;
+      State: <span id="s-state">IDLE</span> &nbsp;|&nbsp;
+      Dir: <span id="s-dir">—</span><br>
+      Door: <span id="s-door">closed</span>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div id="controls">
+
+    <div id="hall-panel">
+      <div class="panel-title">Hall Calls</div>
+      <table id="hall-table"></table>
+    </div>
+
+    <div id="cabin-panel">
+      <div class="panel-title">Cabin Panel</div>
+      <div id="cabin-grid"></div>
+    </div>
+
+    <div>
+      <div class="panel-title">Simulation Speed</div>
+      <div id="speed-wrap">
+        <label>Fast</label>
+        <input type="range" id="speed-slider" min="30" max="300" value="80">
+        <label>Slow</label>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel-title">Event Log</div>
+      <div id="log"></div>
+    </div>
+
+    <button id="reset-btn">⟳ Reset</button>
+  </div>
+</div>
+
+<script>
+// =====================================================================
+// ELEVATOR ENGINE — exact port of elevator_engine.py / elevator_controller.v
+// SCAN/LOOK priority scheduling, 3-state FSM
+// =====================================================================
+const NUM_FLOORS  = 4;
+const MOVE_TICKS  = 8;   // ticks per floor travel
+const DOOR_TICKS  = 6;   // ticks door stays open
+
+const State = { IDLE:'IDLE', MOVE:'MOVE', DOOR:'DOOR' };
+const Dir   = { NONE:0, UP:1, DOWN:2 };
+
+class ElevatorEngine {
+  constructor() { this.reset(); }
+
+  reset() {
+    this.floor      = 0;          // 0-based current floor
+    this.state      = State.IDLE;
+    this.dir        = Dir.NONE;
+    this.doorOpen   = false;
+    this._moveCnt   = 0;
+    this._doorCnt   = 0;
+    this.cabin      = Array(NUM_FLOORS).fill(false);
+    this.hallUp     = Array(NUM_FLOORS).fill(false);
+    this.hallDown   = Array(NUM_FLOORS).fill(false);
+    this.log        = [];
+    this.progress   = 0;   // 0..1 animation fraction
+  }
+
+  reqCabin(f)    { this.cabin[f]    = true; this._log(`Cabin → Floor ${f+1}`); }
+  reqHallUp(f)   { this.hallUp[f]   = true; this._log(`Hall ▲ at Floor ${f+1}`); }
+  reqHallDown(f) { this.hallDown[f] = true; this._log(`Hall ▼ at Floor ${f+1}`); }
+
+  _anyMask()   { return this.cabin.map((c,i) => c || this.hallUp[i] || this.hallDown[i]); }
+  _hasAbove(m) { return m.slice(this.floor+1).some(Boolean); }
+  _hasBelow(m) { return m.slice(0, this.floor).some(Boolean); }
+
+  _nearest(mask) {
+    let best = this.floor, bestD = NUM_FLOORS+1;
+    mask.forEach((v,k) => {
+      if (v) { const d = Math.abs(k - this.floor); if (d < bestD) { bestD=d; best=k; } }
+    });
+    return best;
+  }
+
+  _shouldStop() {
+    const f=this.floor, d=this.dir, m=this._anyMask();
+    if (this.cabin[f]) return true;
+    if (d===Dir.UP   && this.hallUp[f])   return true;
+    if (d===Dir.DOWN && this.hallDown[f]) return true;
+    // reversal: nothing ahead but opposite call here
+    if (d===Dir.UP   && !this._hasAbove(m) && this.hallDown[f]) return true;
+    if (d===Dir.DOWN && !this._hasBelow(m) && this.hallUp[f])   return true;
+    return false;
+  }
+
+  _clearHere() {
+    const f=this.floor, d=this.dir;
+    this.cabin[f] = false;
+    if (d !== Dir.DOWN) this.hallUp[f]   = false;
+    if (d !== Dir.UP)   this.hallDown[f] = false;
+  }
+
+  _openDoor() {
+    this._clearHere();
+    this.state    = State.DOOR;
+    this._doorCnt = 0;
+    this.doorOpen = true;
+    this._log(`Floor ${this.floor+1}: door opened`);
+  }
+
+  _log(msg) { this.log.push(msg); if (this.log.length > 300) this.log.shift(); }
+
+  tick() {
+    const mask = this._anyMask();
+
+    if (this.state === State.IDLE) {
+      this.doorOpen  = false;
+      this.progress  = 0;
+      if (mask[this.floor]) {
+        this._openDoor();
+      } else if (mask.some(Boolean)) {
+        const target = this._nearest(mask);
+        this.dir   = target > this.floor ? Dir.UP : Dir.DOWN;
+        this.state = State.MOVE;
+        this._moveCnt = 0;
+        this._log(`Departing Floor ${this.floor+1} → ${this.dir===Dir.UP?'UP':'DOWN'}`);
+      }
+
+    } else if (this.state === State.MOVE) {
+      this._moveCnt++;
+      this.progress = this._moveCnt / MOVE_TICKS;
+      if (this._moveCnt >= MOVE_TICKS) {
+        this._moveCnt = 0;
+        this.progress = 0;
+        this.floor += (this.dir === Dir.UP ? 1 : -1);
+        this.floor  = Math.max(0, Math.min(NUM_FLOORS-1, this.floor));
+        if (this._shouldStop()) this._openDoor();
+      }
+
+    } else { // DOOR
+      this._doorCnt++;
+      if (this._doorCnt >= DOOR_TICKS) {
+        this.doorOpen = false;
+        this.state    = State.IDLE;
+        this._log(`Floor ${this.floor+1}: door closed`);
+      }
+    }
+  }
+}
+
+// =====================================================================
+// UI
+// =====================================================================
+const FLOOR_H = 110;   // px per floor in building div
+
+const eng = new ElevatorEngine();
+let   tickMs = 80;
+let   timer  = null;
+let   logLen = 0;
+
+// ---- Build building rows ----
+const building   = document.getElementById('building');
+const hallUpBtns = {}, hallDownBtns = {}, cabinBtns = {};
+
+for (let f = NUM_FLOORS-1; f >= 0; f--) {
+  const row = document.createElement('div');
+  row.className = 'floor-row';
+  row.style.bottom = (f * FLOOR_H) + 'px';
+  row.style.height  = FLOOR_H + 'px';
+
+  // label
+  const lbl = document.createElement('div');
+  lbl.className = 'floor-label';
+  lbl.textContent = `F${f+1}`;
+  row.appendChild(lbl);
+
+  // dots (cabin / hall-up / hall-down indicators inside building)
+  const dotsWrap = document.createElement('div');
+  dotsWrap.className = 'floor-dots';
+  dotsWrap.style.top = '50%'; dotsWrap.style.transform = 'translateY(-50%)';
+  ['cabin','up','down'].forEach(type => {
+    const d = document.createElement('div');
+    d.className = 'dot';
+    d.id = `dot-${type}-${f}`;
+    dotsWrap.appendChild(d);
+  });
+  row.appendChild(dotsWrap);
+  building.appendChild(row);
+}
+
+// ---- Size car ----
+const car = document.getElementById('car');
+car.style.height = (FLOOR_H - 14) + 'px';
+
+// ---- Hall call table ----
+const hallTable = document.getElementById('hall-table');
+for (let f = NUM_FLOORS-1; f >= 0; f--) {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td class="fl-name">Floor ${f+1}</td><td></td><td></td>`;
+  const tdUp = tr.cells[1], tdDown = tr.cells[2];
+
+  if (f < NUM_FLOORS-1) {
+    const b = document.createElement('button');
+    b.className = 'hall-btn'; b.textContent = '▲'; b.id = `hu-${f}`;
+    b.onclick = () => eng.reqHallUp(f);
+    tdUp.appendChild(b);
+    hallUpBtns[f] = b;
+  } else {
+    tdUp.innerHTML = '<span style="color:#334155;padding:5px 10px">—</span>';
+  }
+
+  if (f > 0) {
+    const b = document.createElement('button');
+    b.className = 'hall-btn'; b.textContent = '▼'; b.id = `hd-${f}`;
+    b.onclick = () => eng.reqHallDown(f);
+    tdDown.appendChild(b);
+    hallDownBtns[f] = b;
+  } else {
+    tdDown.innerHTML = '<span style="color:#334155;padding:5px 10px">—</span>';
+  }
+
+  hallTable.appendChild(tr);
+}
+
+// ---- Cabin buttons ----
+const cabinGrid = document.getElementById('cabin-grid');
+// display order: 4 3 / 2 1  (top row = higher floors, like a real elevator)
+[3, 2, 1, 0].forEach(f => {
+  const b = document.createElement('button');
+  b.className = 'cabin-btn'; b.textContent = f+1;
+  b.onclick = () => eng.reqCabin(f);
+  cabinGrid.appendChild(b);
+  cabinBtns[f] = b;
+});
+
+// ---- Speed slider ----
+document.getElementById('speed-slider').addEventListener('input', e => {
+  tickMs = parseInt(e.target.value);
+  restartTimer();
+});
+
+// ---- Reset ----
+document.getElementById('reset-btn').addEventListener('click', () => {
+  eng.reset();
+  logLen = 0;
+  document.getElementById('log').innerHTML = '';
+  render();
+});
+
+// ---- Car position ----
+function carTopPx(floor, progress, dir) {
+  // bottom of building = floor 0; top = floor N-1
+  const basePx = (NUM_FLOORS - 1 - floor) * FLOOR_H + 7;
+  const onePx  = FLOOR_H;
+  if (dir === Dir.UP)   return basePx - progress * onePx;
+  if (dir === Dir.DOWN) return basePx + progress * onePx;
+  return basePx;
+}
+
+// ---- Render ----
+function render() {
+  const f = eng.floor;
+
+  // car position
+  car.style.top = carTopPx(eng.floor, eng.progress, eng.dir) + 'px';
+
+  // door animation
+  const dw = eng.doorOpen ? 29 : 0;
+  document.getElementById('door-l').style.width = dw + 'px';
+  document.getElementById('door-r').style.width = dw + 'px';
+
+  // dots
+  for (let i = 0; i < NUM_FLOORS; i++) {
+    document.getElementById(`dot-cabin-${i}`).className = 'dot' + (eng.cabin[i]    ? ' cabin-on' : '');
+    document.getElementById(`dot-up-${i}`).className    = 'dot' + (eng.hallUp[i]   ? ' up-on'    : '');
+    document.getElementById(`dot-down-${i}`).className  = 'dot' + (eng.hallDown[i] ? ' down-on'  : '');
+  }
+
+  // hall + cabin button pending highlights
+  for (let i = 0; i < NUM_FLOORS; i++) {
+    if (hallUpBtns[i])   hallUpBtns[i].classList.toggle('pending',   eng.hallUp[i]);
+    if (hallDownBtns[i]) hallDownBtns[i].classList.toggle('pending',  eng.hallDown[i]);
+    cabinBtns[i].classList.toggle('pending', eng.cabin[i]);
+  }
+
+  // status bar
+  document.getElementById('s-floor').textContent = f + 1;
+  const stEl = document.getElementById('s-state');
+  stEl.textContent  = eng.state;
+  stEl.className    = { IDLE:'state-idle', MOVE:'state-move', DOOR:'state-door' }[eng.state];
+  document.getElementById('s-dir').textContent  =
+    eng.dir===Dir.UP ? '▲ UP' : eng.dir===Dir.DOWN ? '▼ DOWN' : '—';
+  const doorEl = document.getElementById('s-door');
+  doorEl.textContent = eng.doorOpen ? 'OPEN' : 'closed';
+  doorEl.style.color = eng.doorOpen ? 'var(--door)' : 'var(--muted)';
+
+  // log
+  const logDiv = document.getElementById('log');
+  while (logLen < eng.log.length) {
+    const p = document.createElement('p');
+    p.textContent = eng.log[logLen++];
+    logDiv.appendChild(p);
+  }
+  logDiv.scrollTop = logDiv.scrollHeight;
+}
+
+// ---- Main loop ----
+function loop() {
+  eng.tick();
+  render();
+  timer = setTimeout(loop, tickMs);
+}
+
+function restartTimer() {
+  clearTimeout(timer);
+  timer = setTimeout(loop, tickMs);
+}
+
+restartTimer();
+</script>
+</body>
+</html>

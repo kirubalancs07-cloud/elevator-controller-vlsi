@@ -1,0 +1,1322 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Running command `
+read_verilog rtl/elevator_controller.v;
+synth -top elevator_controller;
+stat;
+write_verilog synth/elevator_controller_synth.v
+' --
+
+1. Executing Verilog-2005 frontend: rtl/elevator_controller.v
+Parsing Verilog input from `rtl/elevator_controller.v' to AST representation.
+Generating RTLIL representation for module `\elevator_controller'.
+Successfully finished Verilog frontend.
+
+2. Executing SYNTH pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \elevator_controller
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \elevator_controller
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 15 switch rules as full_case in process $proc$rtl/elevator_controller.v:212$277 in module elevator_controller.
+Marked 14 switch rules as full_case in process $proc$rtl/elevator_controller.v:180$181 in module elevator_controller.
+Marked 5 switch rules as full_case in process $proc$rtl/elevator_controller.v:154$31 in module elevator_controller.
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 47 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~35 debug messages>
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\elevator_controller.$proc$rtl/elevator_controller.v:271$359'.
+Creating decoders for process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+     1/49: $11\nearest_floor$func$rtl/elevator_controller.v:233$25.best_floor[1:0]$347
+     2/49: $11\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$346
+     3/49: $10\nearest_floor$func$rtl/elevator_controller.v:233$25.best_floor[1:0]$339
+     4/49: $10\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$338
+     5/49: $7\nearest_floor$func$rtl/elevator_controller.v:233$25.diffv[31:0]$340
+     6/49: $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_floor[1:0]$337
+     7/49: $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336
+     8/49: $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_floor[1:0]$329
+     9/49: $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328
+    10/49: $6\nearest_floor$func$rtl/elevator_controller.v:233$25.diffv[31:0]$330
+    11/49: $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_floor[1:0]$327
+    12/49: $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326
+    13/49: $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_floor[1:0]$319
+    14/49: $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318
+    15/49: $5\nearest_floor$func$rtl/elevator_controller.v:233$25.diffv[31:0]$320
+    16/49: $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_floor[1:0]$317
+    17/49: $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316
+    18/49: $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_floor[1:0]$309
+    19/49: $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308
+    20/49: $4\nearest_floor$func$rtl/elevator_controller.v:233$25.diffv[31:0]$310
+    21/49: $3\nearest_floor$func$rtl/elevator_controller.v:233$25.$result[1:0]$301
+    22/49: $3\nearest_floor$func$rtl/elevator_controller.v:233$25.k[31:0]$304
+    23/49: $3\nearest_floor$func$rtl/elevator_controller.v:233$25.diffv[31:0]$307
+    24/49: $3\nearest_floor$func$rtl/elevator_controller.v:233$25.best_floor[1:0]$306
+    25/49: $3\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$305
+    26/49: $3\nearest_floor$func$rtl/elevator_controller.v:233$25.floor[1:0]$303
+    27/49: $3\nearest_floor$func$rtl/elevator_controller.v:233$25.mask[3:0]$302
+    28/49: $2\nearest_floor$func$rtl/elevator_controller.v:233$25.diffv[31:0]$299
+    29/49: $2\nearest_floor$func$rtl/elevator_controller.v:233$25.best_floor[1:0]$298
+    30/49: $2\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$297
+    31/49: $2\nearest_floor$func$rtl/elevator_controller.v:233$25.k[31:0]$296
+    32/49: $2\nearest_floor$func$rtl/elevator_controller.v:233$25.floor[1:0]$295
+    33/49: $2\nearest_floor$func$rtl/elevator_controller.v:233$25.mask[3:0]$294
+    34/49: $2\nearest_floor$func$rtl/elevator_controller.v:233$25.$result[1:0]$293
+    35/49: $0\state[1:0]
+    36/49: $1\nearest_floor$func$rtl/elevator_controller.v:233$25.diffv[31:0]$292
+    37/49: $1\nearest_floor$func$rtl/elevator_controller.v:233$25.best_floor[1:0]$291
+    38/49: $1\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$290
+    39/49: $1\nearest_floor$func$rtl/elevator_controller.v:233$25.k[31:0]$289
+    40/49: $1\nearest_floor$func$rtl/elevator_controller.v:233$25.floor[1:0]$288
+    41/49: $1\nearest_floor$func$rtl/elevator_controller.v:233$25.mask[3:0]$287
+    42/49: $1\nearest_floor$func$rtl/elevator_controller.v:233$25.$result[1:0]$286
+    43/49: $0\door_cnt[2:0]
+    44/49: $0\move_cnt[2:0]
+    45/49: $0\direction[1:0]
+    46/49: $0\moving_down[0:0]
+    47/49: $0\moving_up[0:0]
+    48/49: $0\door_open[0:0]
+    49/49: $0\current_floor[1:0]
+Creating decoders for process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+     1/42: $6\next_state[1:0]
+     2/42: $5\next_state[1:0]
+     3/42: $6\has_below$func$rtl/elevator_controller.v:146$24.$result[0:0]$254
+     4/42: $5\has_below$func$rtl/elevator_controller.v:146$24.$result[0:0]$251
+     5/42: $4\has_below$func$rtl/elevator_controller.v:146$24.$result[0:0]$248
+     6/42: $3\has_below$func$rtl/elevator_controller.v:146$24.$result[0:0]$245
+     7/42: $6\has_above$func$rtl/elevator_controller.v:145$23.$result[0:0]$240
+     8/42: $5\has_above$func$rtl/elevator_controller.v:145$23.$result[0:0]$237
+     9/42: $4\has_above$func$rtl/elevator_controller.v:145$23.$result[0:0]$234
+    10/42: $3\has_above$func$rtl/elevator_controller.v:145$23.$result[0:0]$231
+    11/42: $4\next_state[1:0]
+    12/42: $2\should_stop_here$func$rtl/elevator_controller.v:193$22.$result[0:0]$213
+    13/42: $2\has_below$func$rtl/elevator_controller.v:146$24.k[31:0]$226
+    14/42: $2\has_below$func$rtl/elevator_controller.v:146$24.$result[0:0]$223
+    15/42: $2\has_below$func$rtl/elevator_controller.v:146$24.floor[1:0]$225
+    16/42: $2\has_below$func$rtl/elevator_controller.v:146$24.mask[3:0]$224
+    17/42: $2\has_above$func$rtl/elevator_controller.v:145$23.k[31:0]$222
+    18/42: $2\has_above$func$rtl/elevator_controller.v:145$23.$result[0:0]$219
+    19/42: $2\has_above$func$rtl/elevator_controller.v:145$23.floor[1:0]$221
+    20/42: $2\has_above$func$rtl/elevator_controller.v:145$23.mask[3:0]$220
+    21/42: $2\should_stop_here$func$rtl/elevator_controller.v:193$22.dir[1:0]$218
+    22/42: $2\should_stop_here$func$rtl/elevator_controller.v:193$22.floor[1:0]$217
+    23/42: $2\should_stop_here$func$rtl/elevator_controller.v:193$22.down_m[3:0]$216
+    24/42: $2\should_stop_here$func$rtl/elevator_controller.v:193$22.up_m[3:0]$215
+    25/42: $2\should_stop_here$func$rtl/elevator_controller.v:193$22.cabin_m[3:0]$214
+    26/42: $3\next_state[1:0]
+    27/42: $2\next_state[1:0]
+    28/42: $1\next_state[1:0]
+    29/42: $1\has_below$func$rtl/elevator_controller.v:146$24.k[31:0]$209
+    30/42: $1\has_below$func$rtl/elevator_controller.v:146$24.floor[1:0]$208
+    31/42: $1\has_below$func$rtl/elevator_controller.v:146$24.mask[3:0]$207
+    32/42: $1\has_below$func$rtl/elevator_controller.v:146$24.$result[0:0]$206
+    33/42: $1\has_above$func$rtl/elevator_controller.v:145$23.k[31:0]$205
+    34/42: $1\has_above$func$rtl/elevator_controller.v:145$23.floor[1:0]$204
+    35/42: $1\has_above$func$rtl/elevator_controller.v:145$23.mask[3:0]$203
+    36/42: $1\has_above$func$rtl/elevator_controller.v:145$23.$result[0:0]$202
+    37/42: $1\should_stop_here$func$rtl/elevator_controller.v:193$22.dir[1:0]$201
+    38/42: $1\should_stop_here$func$rtl/elevator_controller.v:193$22.floor[1:0]$200
+    39/42: $1\should_stop_here$func$rtl/elevator_controller.v:193$22.down_m[3:0]$199
+    40/42: $1\should_stop_here$func$rtl/elevator_controller.v:193$22.up_m[3:0]$198
+    41/42: $1\should_stop_here$func$rtl/elevator_controller.v:193$22.cabin_m[3:0]$197
+    42/42: $1\should_stop_here$func$rtl/elevator_controller.v:193$22.$result[0:0]$196
+Creating decoders for process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+     1/62: $4$lookahead\hall_down_pending$30[3:0]$153
+     2/62: $3$bitselwrite$data$rtl/elevator_controller.v:172$20[3:0]$149
+     3/62: $3$bitselwrite$mask$rtl/elevator_controller.v:172$19[3:0]$148
+     4/62: $3$bitselwrite$sel$rtl/elevator_controller.v:172$21[1:0]$150
+     5/62: $4$lookahead\hall_up_pending$29[3:0]$152
+     6/62: $3$bitselwrite$data$rtl/elevator_controller.v:171$17[3:0]$146
+     7/62: $3$bitselwrite$mask$rtl/elevator_controller.v:171$16[3:0]$145
+     8/62: $3$bitselwrite$sel$rtl/elevator_controller.v:171$18[1:0]$147
+     9/62: $3$lookahead\cabin_req_pending$28[3:0]$151
+    10/62: $3$bitselwrite$data$rtl/elevator_controller.v:170$14[3:0]$143
+    11/62: $3$bitselwrite$mask$rtl/elevator_controller.v:170$13[3:0]$142
+    12/62: $3$bitselwrite$sel$rtl/elevator_controller.v:170$15[1:0]$144
+    13/62: $3$lookahead\hall_down_pending$30[3:0]$129
+    14/62: $3$bitselwrite$data$rtl/elevator_controller.v:168$11[3:0]$127
+    15/62: $3$bitselwrite$mask$rtl/elevator_controller.v:168$10[3:0]$126
+    16/62: $3$bitselwrite$sel$rtl/elevator_controller.v:168$12[1:0]$128
+    17/62: $3$lookahead\hall_up_pending$29[3:0]$115
+    18/62: $3$bitselwrite$data$rtl/elevator_controller.v:167$8[3:0]$113
+    19/62: $3$bitselwrite$mask$rtl/elevator_controller.v:167$7[3:0]$112
+    20/62: $3$bitselwrite$sel$rtl/elevator_controller.v:167$9[1:0]$114
+    21/62: $2$lookahead\hall_down_pending$30[3:0]$101
+    22/62: $2$bitselwrite$sel$rtl/elevator_controller.v:168$12[1:0]$89
+    23/62: $2$bitselwrite$data$rtl/elevator_controller.v:168$11[3:0]$88
+    24/62: $2$bitselwrite$mask$rtl/elevator_controller.v:168$10[3:0]$87
+    25/62: $2$lookahead\hall_up_pending$29[3:0]$100
+    26/62: $2$bitselwrite$sel$rtl/elevator_controller.v:167$9[1:0]$86
+    27/62: $2$bitselwrite$data$rtl/elevator_controller.v:167$8[3:0]$85
+    28/62: $2$bitselwrite$mask$rtl/elevator_controller.v:167$7[3:0]$84
+    29/62: $2$lookahead\cabin_req_pending$28[3:0]$99
+    30/62: $2$bitselwrite$data$rtl/elevator_controller.v:166$5[3:0]$82
+    31/62: $2$bitselwrite$mask$rtl/elevator_controller.v:166$4[3:0]$81
+    32/62: $2$bitselwrite$sel$rtl/elevator_controller.v:166$6[1:0]$83
+    33/62: $2$bitselwrite$sel$rtl/elevator_controller.v:172$21[1:0]$98
+    34/62: $2$bitselwrite$data$rtl/elevator_controller.v:172$20[3:0]$97
+    35/62: $2$bitselwrite$mask$rtl/elevator_controller.v:172$19[3:0]$96
+    36/62: $2$bitselwrite$sel$rtl/elevator_controller.v:171$18[1:0]$95
+    37/62: $2$bitselwrite$data$rtl/elevator_controller.v:171$17[3:0]$94
+    38/62: $2$bitselwrite$mask$rtl/elevator_controller.v:171$16[3:0]$93
+    39/62: $2$bitselwrite$sel$rtl/elevator_controller.v:170$15[1:0]$92
+    40/62: $2$bitselwrite$data$rtl/elevator_controller.v:170$14[3:0]$91
+    41/62: $2$bitselwrite$mask$rtl/elevator_controller.v:170$13[3:0]$90
+    42/62: $1$lookahead\hall_down_pending$30[3:0]$74
+    43/62: $1$lookahead\hall_up_pending$29[3:0]$73
+    44/62: $1$lookahead\cabin_req_pending$28[3:0]$72
+    45/62: $1$bitselwrite$sel$rtl/elevator_controller.v:172$21[1:0]$71
+    46/62: $1$bitselwrite$data$rtl/elevator_controller.v:172$20[3:0]$70
+    47/62: $1$bitselwrite$mask$rtl/elevator_controller.v:172$19[3:0]$69
+    48/62: $1$bitselwrite$sel$rtl/elevator_controller.v:171$18[1:0]$68
+    49/62: $1$bitselwrite$data$rtl/elevator_controller.v:171$17[3:0]$67
+    50/62: $1$bitselwrite$mask$rtl/elevator_controller.v:171$16[3:0]$66
+    51/62: $1$bitselwrite$sel$rtl/elevator_controller.v:170$15[1:0]$65
+    52/62: $1$bitselwrite$data$rtl/elevator_controller.v:170$14[3:0]$64
+    53/62: $1$bitselwrite$mask$rtl/elevator_controller.v:170$13[3:0]$63
+    54/62: $1$bitselwrite$sel$rtl/elevator_controller.v:168$12[1:0]$62
+    55/62: $1$bitselwrite$data$rtl/elevator_controller.v:168$11[3:0]$61
+    56/62: $1$bitselwrite$mask$rtl/elevator_controller.v:168$10[3:0]$60
+    57/62: $1$bitselwrite$sel$rtl/elevator_controller.v:167$9[1:0]$59
+    58/62: $1$bitselwrite$data$rtl/elevator_controller.v:167$8[3:0]$58
+    59/62: $1$bitselwrite$mask$rtl/elevator_controller.v:167$7[3:0]$57
+    60/62: $1$bitselwrite$sel$rtl/elevator_controller.v:166$6[1:0]$56
+    61/62: $1$bitselwrite$data$rtl/elevator_controller.v:166$5[3:0]$55
+    62/62: $1$bitselwrite$mask$rtl/elevator_controller.v:166$4[3:0]$54
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\elevator_controller.\state_o' from process `\elevator_controller.$proc$rtl/elevator_controller.v:271$359'.
+No latch inferred for signal `\elevator_controller.\next_state' from process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+No latch inferred for signal `\elevator_controller.\should_stop_here$func$rtl/elevator_controller.v:193$22.$result' from process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+No latch inferred for signal `\elevator_controller.\should_stop_here$func$rtl/elevator_controller.v:193$22.cabin_m' from process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+No latch inferred for signal `\elevator_controller.\should_stop_here$func$rtl/elevator_controller.v:193$22.up_m' from process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+No latch inferred for signal `\elevator_controller.\should_stop_here$func$rtl/elevator_controller.v:193$22.down_m' from process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+No latch inferred for signal `\elevator_controller.\should_stop_here$func$rtl/elevator_controller.v:193$22.floor' from process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+No latch inferred for signal `\elevator_controller.\should_stop_here$func$rtl/elevator_controller.v:193$22.dir' from process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+No latch inferred for signal `\elevator_controller.\has_above$func$rtl/elevator_controller.v:145$23.$result' from process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+No latch inferred for signal `\elevator_controller.\has_above$func$rtl/elevator_controller.v:145$23.mask' from process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+No latch inferred for signal `\elevator_controller.\has_above$func$rtl/elevator_controller.v:145$23.floor' from process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+No latch inferred for signal `\elevator_controller.\has_above$func$rtl/elevator_controller.v:145$23.k' from process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+No latch inferred for signal `\elevator_controller.\has_below$func$rtl/elevator_controller.v:146$24.$result' from process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+No latch inferred for signal `\elevator_controller.\has_below$func$rtl/elevator_controller.v:146$24.mask' from process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+No latch inferred for signal `\elevator_controller.\has_below$func$rtl/elevator_controller.v:146$24.floor' from process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+No latch inferred for signal `\elevator_controller.\has_below$func$rtl/elevator_controller.v:146$24.k' from process `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\elevator_controller.\current_floor' using process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+  created $dff cell `$procdff$1544' with positive edge clock.
+Creating register for signal `\elevator_controller.\door_open' using process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+  created $dff cell `$procdff$1545' with positive edge clock.
+Creating register for signal `\elevator_controller.\moving_up' using process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+  created $dff cell `$procdff$1546' with positive edge clock.
+Creating register for signal `\elevator_controller.\moving_down' using process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+  created $dff cell `$procdff$1547' with positive edge clock.
+Creating register for signal `\elevator_controller.\state' using process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+  created $dff cell `$procdff$1548' with positive edge clock.
+Creating register for signal `\elevator_controller.\direction' using process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+  created $dff cell `$procdff$1549' with positive edge clock.
+Creating register for signal `\elevator_controller.\move_cnt' using process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+  created $dff cell `$procdff$1550' with positive edge clock.
+Creating register for signal `\elevator_controller.\door_cnt' using process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+  created $dff cell `$procdff$1551' with positive edge clock.
+Creating register for signal `\elevator_controller.\nearest_floor$func$rtl/elevator_controller.v:233$25.$result' using process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+  created $dff cell `$procdff$1552' with positive edge clock.
+Creating register for signal `\elevator_controller.\nearest_floor$func$rtl/elevator_controller.v:233$25.mask' using process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+  created $dff cell `$procdff$1553' with positive edge clock.
+Creating register for signal `\elevator_controller.\nearest_floor$func$rtl/elevator_controller.v:233$25.floor' using process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+  created $dff cell `$procdff$1554' with positive edge clock.
+Creating register for signal `\elevator_controller.\nearest_floor$func$rtl/elevator_controller.v:233$25.k' using process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+  created $dff cell `$procdff$1555' with positive edge clock.
+Creating register for signal `\elevator_controller.\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist' using process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+  created $dff cell `$procdff$1556' with positive edge clock.
+Creating register for signal `\elevator_controller.\nearest_floor$func$rtl/elevator_controller.v:233$25.best_floor' using process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+  created $dff cell `$procdff$1557' with positive edge clock.
+Creating register for signal `\elevator_controller.\nearest_floor$func$rtl/elevator_controller.v:233$25.diffv' using process `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+  created $dff cell `$procdff$1558' with positive edge clock.
+Creating register for signal `\elevator_controller.\cabin_req_pending' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1559' with positive edge clock.
+Creating register for signal `\elevator_controller.\hall_up_pending' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1560' with positive edge clock.
+Creating register for signal `\elevator_controller.\hall_down_pending' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1561' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$mask$rtl/elevator_controller.v:166$4' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1562' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$data$rtl/elevator_controller.v:166$5' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1563' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$sel$rtl/elevator_controller.v:166$6' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1564' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$mask$rtl/elevator_controller.v:167$7' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1565' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$data$rtl/elevator_controller.v:167$8' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1566' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$sel$rtl/elevator_controller.v:167$9' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1567' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$mask$rtl/elevator_controller.v:168$10' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1568' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$data$rtl/elevator_controller.v:168$11' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1569' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$sel$rtl/elevator_controller.v:168$12' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1570' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$mask$rtl/elevator_controller.v:170$13' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1571' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$data$rtl/elevator_controller.v:170$14' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1572' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$sel$rtl/elevator_controller.v:170$15' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1573' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$mask$rtl/elevator_controller.v:171$16' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1574' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$data$rtl/elevator_controller.v:171$17' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1575' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$sel$rtl/elevator_controller.v:171$18' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1576' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$mask$rtl/elevator_controller.v:172$19' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1577' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$data$rtl/elevator_controller.v:172$20' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1578' with positive edge clock.
+Creating register for signal `\elevator_controller.$bitselwrite$sel$rtl/elevator_controller.v:172$21' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1579' with positive edge clock.
+Creating register for signal `\elevator_controller.$lookahead\cabin_req_pending$28' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1580' with positive edge clock.
+Creating register for signal `\elevator_controller.$lookahead\hall_up_pending$29' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1581' with positive edge clock.
+Creating register for signal `\elevator_controller.$lookahead\hall_down_pending$30' using process `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+  created $dff cell `$procdff$1582' with positive edge clock.
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `elevator_controller.$proc$rtl/elevator_controller.v:271$359'.
+Found and cleaned up 16 empty switches in `\elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+Removing empty process `elevator_controller.$proc$rtl/elevator_controller.v:212$277'.
+Found and cleaned up 14 empty switches in `\elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+Removing empty process `elevator_controller.$proc$rtl/elevator_controller.v:180$181'.
+Found and cleaned up 5 empty switches in `\elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+Removing empty process `elevator_controller.$proc$rtl/elevator_controller.v:154$31'.
+Cleaned up 35 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+<suppressed ~155 debug messages>
+
+2.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+<suppressed ~13 debug messages>
+
+2.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+Removed 286 unused cells and 776 unused wires.
+<suppressed ~307 debug messages>
+
+2.5. Executing CHECK pass (checking for obvious problems).
+Checking module elevator_controller...
+Found and reported 0 problems.
+
+2.6. Executing OPT pass (performing simple optimizations).
+
+2.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+
+2.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+<suppressed ~282 debug messages>
+Removed a total of 94 cells.
+
+2.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \elevator_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$1102.
+    dead port 2/2 on $mux $procmux$1104.
+    dead port 2/2 on $mux $procmux$1112.
+    dead port 1/2 on $mux $procmux$1179.
+    dead port 2/2 on $mux $procmux$1182.
+    dead port 1/2 on $mux $procmux$1215.
+    dead port 2/2 on $mux $procmux$1218.
+    dead port 1/2 on $mux $procmux$1251.
+    dead port 2/2 on $mux $procmux$1254.
+    dead port 2/2 on $mux $procmux$1287.
+    dead port 2/2 on $mux $procmux$1290.
+    dead port 2/2 on $mux $procmux$1323.
+    dead port 2/2 on $mux $procmux$1326.
+    dead port 2/2 on $mux $procmux$1359.
+    dead port 2/2 on $mux $procmux$1383.
+    dead port 2/2 on $mux $procmux$1407.
+    dead port 2/2 on $mux $procmux$368.
+    dead port 2/2 on $mux $procmux$370.
+    dead port 2/2 on $mux $procmux$372.
+    dead port 2/2 on $mux $procmux$375.
+    dead port 2/2 on $mux $procmux$444.
+    dead port 2/2 on $mux $procmux$446.
+    dead port 2/2 on $mux $procmux$448.
+    dead port 2/2 on $mux $procmux$451.
+    dead port 2/2 on $mux $procmux$461.
+    dead port 2/2 on $mux $procmux$463.
+    dead port 2/2 on $mux $procmux$465.
+    dead port 2/2 on $mux $procmux$468.
+    dead port 2/2 on $mux $procmux$477.
+    dead port 2/2 on $mux $procmux$479.
+    dead port 2/2 on $mux $procmux$482.
+    dead port 2/2 on $mux $procmux$520.
+    dead port 2/2 on $mux $procmux$522.
+    dead port 2/2 on $mux $procmux$524.
+    dead port 2/2 on $mux $procmux$527.
+    dead port 2/2 on $mux $procmux$537.
+    dead port 2/2 on $mux $procmux$539.
+    dead port 2/2 on $mux $procmux$541.
+    dead port 2/2 on $mux $procmux$544.
+    dead port 2/2 on $mux $procmux$553.
+    dead port 2/2 on $mux $procmux$555.
+    dead port 2/2 on $mux $procmux$558.
+    dead port 2/2 on $mux $procmux$596.
+    dead port 2/2 on $mux $procmux$598.
+    dead port 2/2 on $mux $procmux$600.
+    dead port 2/2 on $mux $procmux$603.
+    dead port 2/2 on $mux $procmux$613.
+    dead port 2/2 on $mux $procmux$615.
+    dead port 2/2 on $mux $procmux$617.
+    dead port 2/2 on $mux $procmux$620.
+    dead port 2/2 on $mux $procmux$629.
+    dead port 2/2 on $mux $procmux$631.
+    dead port 2/2 on $mux $procmux$634.
+    dead port 2/2 on $mux $procmux$898.
+    dead port 2/2 on $mux $procmux$906.
+    dead port 2/2 on $mux $procmux$908.
+    dead port 2/2 on $mux $procmux$926.
+    dead port 2/2 on $mux $procmux$928.
+    dead port 2/2 on $mux $procmux$936.
+    dead port 2/2 on $mux $procmux$938.
+    dead port 2/2 on $mux $procmux$946.
+    dead port 2/2 on $mux $procmux$948.
+    dead port 2/2 on $mux $procmux$966.
+    dead port 2/2 on $mux $procmux$968.
+    dead port 2/2 on $mux $procmux$976.
+    dead port 2/2 on $mux $procmux$978.
+    dead port 2/2 on $mux $procmux$986.
+    dead port 2/2 on $mux $procmux$988.
+    dead port 2/2 on $mux $procmux$995.
+Removed 69 multiplexer ports.
+<suppressed ~25 debug messages>
+
+2.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \elevator_controller.
+    New ctrl vector for $pmux cell $procmux$856: { $eq$rtl/elevator_controller.v:164$78_Y $auto$opt_reduce.cc:134:opt_pmux$1584 }
+    New ctrl vector for $pmux cell $procmux$864: { $eq$rtl/elevator_controller.v:164$78_Y $auto$opt_reduce.cc:134:opt_pmux$1586 }
+    New ctrl vector for $pmux cell $procmux$872: { $auto$opt_reduce.cc:134:opt_pmux$1588 $procmux$1116_CMP }
+  Optimizing cells in module \elevator_controller.
+Performed a total of 3 changes.
+
+2.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+2.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+Removed 0 unused cells and 164 unused wires.
+<suppressed ~1 debug messages>
+
+2.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+
+2.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+2.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \elevator_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~25 debug messages>
+
+2.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \elevator_controller.
+Performed a total of 0 changes.
+
+2.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+Removed a total of 0 cells.
+
+2.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+
+2.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+
+2.6.16. Finished OPT passes. (There is nothing left to do.)
+
+2.7. Executing FSM pass (extract and optimize FSM).
+
+2.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+Found FSM state register elevator_controller.direction.
+Not marking elevator_controller.state as FSM state register:
+    Register is connected to module port.
+    Users of register don't seem to benefit from recoding.
+
+2.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+Extracting FSM `\direction' from module `\elevator_controller'.
+  found $dff cell for state register: $procdff$1549
+  root of input selection tree: $0\direction[1:0]
+  found reset state: 2'00 (guessed from mux tree)
+  found ctrl input: \rst_n
+  found state code: 2'00
+  found ctrl input: $eq$rtl/elevator_controller.v:169$139_Y
+  found ctrl input: $eq$rtl/elevator_controller.v:231$300_Y
+  found ctrl input: $gt$rtl/elevator_controller.v:233$348_Y
+  found state code: 2'10
+  found state code: 2'01
+  found ctrl output: $ne$rtl/elevator_controller.v:167$111_Y
+  found ctrl output: $ne$rtl/elevator_controller.v:168$125_Y
+  found ctrl output: $eq$rtl/elevator_controller.v:141$256_Y
+  found ctrl output: $eq$rtl/elevator_controller.v:142$260_Y
+  ctrl inputs: { $gt$rtl/elevator_controller.v:233$348_Y $eq$rtl/elevator_controller.v:231$300_Y $eq$rtl/elevator_controller.v:169$139_Y \rst_n }
+  ctrl outputs: { $0\direction[1:0] $eq$rtl/elevator_controller.v:142$260_Y $eq$rtl/elevator_controller.v:141$256_Y $ne$rtl/elevator_controller.v:168$125_Y $ne$rtl/elevator_controller.v:167$111_Y }
+  transition:       2'00 4'---0 ->       2'00 6'000011
+  transition:       2'00 4'--01 ->       2'00 6'000011
+  transition:       2'00 4'-011 ->       2'00 6'000011
+  transition:       2'00 4'0111 ->       2'10 6'100011
+  transition:       2'00 4'1111 ->       2'01 6'010011
+  transition:       2'10 4'---0 ->       2'00 6'001010
+  transition:       2'10 4'--01 ->       2'10 6'101010
+  transition:       2'10 4'-011 ->       2'10 6'101010
+  transition:       2'10 4'0111 ->       2'10 6'101010
+  transition:       2'10 4'1111 ->       2'01 6'011010
+  transition:       2'01 4'---0 ->       2'00 6'000101
+  transition:       2'01 4'--01 ->       2'01 6'010101
+  transition:       2'01 4'-011 ->       2'01 6'010101
+  transition:       2'01 4'0111 ->       2'10 6'100101
+  transition:       2'01 4'1111 ->       2'01 6'010101
+
+2.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\direction$1589' from module `\elevator_controller'.
+
+2.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+Removed 9 unused cells and 9 unused wires.
+<suppressed ~10 debug messages>
+
+2.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\direction$1589' from module `\elevator_controller'.
+  Removing unused output signal $0\direction[1:0] [0].
+  Removing unused output signal $0\direction[1:0] [1].
+
+2.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+Recoding FSM `$fsm$\direction$1589' from module `\elevator_controller' using `auto' encoding:
+  mapping auto encoding to `one-hot` for this FSM.
+  00 -> --1
+  10 -> -1-
+  01 -> 1--
+
+2.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+FSM `$fsm$\direction$1589' from module `elevator_controller':
+-------------------------------------
+
+  Information on FSM $fsm$\direction$1589 (\direction):
+
+  Number of input signals:    4
+  Number of output signals:   4
+  Number of state bits:       3
+
+  Input signals:
+    0: \rst_n
+    1: $eq$rtl/elevator_controller.v:169$139_Y
+    2: $eq$rtl/elevator_controller.v:231$300_Y
+    3: $gt$rtl/elevator_controller.v:233$348_Y
+
+  Output signals:
+    0: $ne$rtl/elevator_controller.v:167$111_Y
+    1: $ne$rtl/elevator_controller.v:168$125_Y
+    2: $eq$rtl/elevator_controller.v:141$256_Y
+    3: $eq$rtl/elevator_controller.v:142$260_Y
+
+  State encoding:
+    0:      3'--1  <RESET STATE>
+    1:      3'-1-
+    2:      3'1--
+
+  Transition Table (state_in, ctrl_in, state_out, ctrl_out):
+      0:     0 4'---0   ->     0 4'0011
+      1:     0 4'--01   ->     0 4'0011
+      2:     0 4'-011   ->     0 4'0011
+      3:     0 4'0111   ->     1 4'0011
+      4:     0 4'1111   ->     2 4'0011
+      5:     1 4'---0   ->     0 4'1010
+      6:     1 4'--01   ->     1 4'1010
+      7:     1 4'-011   ->     1 4'1010
+      8:     1 4'0111   ->     1 4'1010
+      9:     1 4'1111   ->     2 4'1010
+     10:     2 4'---0   ->     0 4'0101
+     11:     2 4'0111   ->     1 4'0101
+     12:     2 4'--01   ->     2 4'0101
+     13:     2 4'-011   ->     2 4'0101
+     14:     2 4'1111   ->     2 4'0101
+
+-------------------------------------
+
+2.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+Mapping FSM `$fsm$\direction$1589' from module `\elevator_controller'.
+
+2.8. Executing OPT pass (performing simple optimizations).
+
+2.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+<suppressed ~1 debug messages>
+
+2.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+<suppressed ~12 debug messages>
+Removed a total of 4 cells.
+
+2.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \elevator_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~24 debug messages>
+
+2.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \elevator_controller.
+Performed a total of 0 changes.
+
+2.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+Removed a total of 0 cells.
+
+2.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$1561 ($dff) from module elevator_controller (D = $2$lookahead\hall_down_pending$30[3:0]$101, Q = \hall_down_pending, rval = 4'0000).
+Adding SRST signal on $procdff$1560 ($dff) from module elevator_controller (D = $2$lookahead\hall_up_pending$29[3:0]$100, Q = \hall_up_pending, rval = 4'0000).
+Adding SRST signal on $procdff$1559 ($dff) from module elevator_controller (D = $2$lookahead\cabin_req_pending$28[3:0]$99, Q = \cabin_req_pending, rval = 4'0000).
+Adding SRST signal on $procdff$1551 ($dff) from module elevator_controller (D = $procmux$825_Y, Q = \door_cnt, rval = 3'000).
+Adding EN signal on $auto$ff.cc:266:slice$1637 ($sdff) from module elevator_controller (D = $procmux$823_Y, Q = \door_cnt).
+Adding SRST signal on $procdff$1550 ($dff) from module elevator_controller (D = $procmux$835_Y, Q = \move_cnt, rval = 3'000).
+Adding EN signal on $auto$ff.cc:266:slice$1639 ($sdff) from module elevator_controller (D = $procmux$835_Y, Q = \move_cnt).
+Adding SRST signal on $procdff$1548 ($dff) from module elevator_controller (D = \next_state, Q = \state, rval = 2'00).
+Adding SRST signal on $procdff$1547 ($dff) from module elevator_controller (D = $procmux$856_Y, Q = \moving_down, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1644 ($sdff) from module elevator_controller (D = $procmux$856_Y, Q = \moving_down).
+Adding SRST signal on $procdff$1546 ($dff) from module elevator_controller (D = $procmux$864_Y, Q = \moving_up, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1648 ($sdff) from module elevator_controller (D = $procmux$864_Y, Q = \moving_up).
+Adding SRST signal on $procdff$1545 ($dff) from module elevator_controller (D = $procmux$872_Y, Q = \door_open, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1652 ($sdff) from module elevator_controller (D = $procmux$872_Y, Q = \door_open).
+Adding SRST signal on $procdff$1544 ($dff) from module elevator_controller (D = $procmux$889_Y, Q = \current_floor, rval = 2'00).
+Adding EN signal on $auto$ff.cc:266:slice$1656 ($sdff) from module elevator_controller (D = $procmux$885_Y, Q = \current_floor).
+
+2.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+Removed 13 unused cells and 22 unused wires.
+<suppressed ~14 debug messages>
+
+2.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+<suppressed ~5 debug messages>
+
+2.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+2.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \elevator_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~23 debug messages>
+
+2.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \elevator_controller.
+Performed a total of 0 changes.
+
+2.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+2.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+2.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+
+2.8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+2.8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \elevator_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~23 debug messages>
+
+2.8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \elevator_controller.
+Performed a total of 0 changes.
+
+2.8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+Removed a total of 0 cells.
+
+2.8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+
+2.8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+
+2.8.23. Finished OPT passes. (There is nothing left to do.)
+
+2.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 2) from port B of cell elevator_controller.$eq$rtl/elevator_controller.v:164$78 ($eq).
+Removed top 29 bits (of 32) from port A of cell elevator_controller.$neg$rtl/elevator_controller.v:0$103 ($neg).
+Converting cell elevator_controller.$neg$rtl/elevator_controller.v:0$103 ($neg) from signed to unsigned.
+Removed top 1 bits (of 3) from port A of cell elevator_controller.$neg$rtl/elevator_controller.v:0$103 ($neg).
+Removed top 1 bits (of 3) from port B of cell elevator_controller.$auto$fsm_map.cc:77:implement_pattern_cache$1626 ($eq).
+Removed top 1 bits (of 4) from port B of cell elevator_controller.$auto$fsm_map.cc:77:implement_pattern_cache$1619 ($eq).
+Removed top 1 bits (of 2) from port B of cell elevator_controller.$auto$fsm_map.cc:77:implement_pattern_cache$1622 ($eq).
+Removed top 31 bits (of 32) from port A of cell elevator_controller.$lt$rtl/elevator_controller.v:103$243 ($lt).
+Removed top 31 bits (of 32) from port A of cell elevator_controller.$lt$rtl/elevator_controller.v:103$246 ($lt).
+Removed top 30 bits (of 32) from port A of cell elevator_controller.$lt$rtl/elevator_controller.v:103$249 ($lt).
+Removed top 30 bits (of 32) from port A of cell elevator_controller.$lt$rtl/elevator_controller.v:103$252 ($lt).
+Removed top 1 bits (of 3) from port B of cell elevator_controller.$eq$rtl/elevator_controller.v:202$276 ($eq).
+Removed top 1 bits (of 2) from port B of cell elevator_controller.$eq$rtl/elevator_controller.v:231$300 ($eq).
+Removed top 31 bits (of 32) from port A of cell elevator_controller.$gt$rtl/elevator_controller.v:122$311 ($gt).
+Removed top 31 bits (of 32) from port A of cell elevator_controller.$sub$rtl/elevator_controller.v:122$312 ($sub).
+Removed top 29 bits (of 32) from port Y of cell elevator_controller.$sub$rtl/elevator_controller.v:122$312 ($sub).
+Removed top 28 bits (of 32) from port B of cell elevator_controller.$lt$rtl/elevator_controller.v:123$315 ($lt).
+Removed top 31 bits (of 32) from port A of cell elevator_controller.$gt$rtl/elevator_controller.v:122$321 ($gt).
+Removed top 31 bits (of 32) from port A of cell elevator_controller.$sub$rtl/elevator_controller.v:122$322 ($sub).
+Removed top 29 bits (of 32) from port Y of cell elevator_controller.$sub$rtl/elevator_controller.v:122$322 ($sub).
+Removed top 31 bits (of 32) from port B of cell elevator_controller.$sub$rtl/elevator_controller.v:122$323 ($sub).
+Removed top 29 bits (of 32) from port Y of cell elevator_controller.$sub$rtl/elevator_controller.v:122$323 ($sub).
+Removed top 30 bits (of 32) from port A of cell elevator_controller.$gt$rtl/elevator_controller.v:122$331 ($gt).
+Removed top 30 bits (of 32) from port A of cell elevator_controller.$sub$rtl/elevator_controller.v:122$332 ($sub).
+Removed top 29 bits (of 32) from port Y of cell elevator_controller.$sub$rtl/elevator_controller.v:122$332 ($sub).
+Removed top 30 bits (of 32) from port B of cell elevator_controller.$sub$rtl/elevator_controller.v:122$333 ($sub).
+Removed top 29 bits (of 32) from port Y of cell elevator_controller.$sub$rtl/elevator_controller.v:122$333 ($sub).
+Removed top 30 bits (of 32) from port A of cell elevator_controller.$gt$rtl/elevator_controller.v:122$341 ($gt).
+Removed top 30 bits (of 32) from port A of cell elevator_controller.$sub$rtl/elevator_controller.v:122$342 ($sub).
+Removed top 29 bits (of 32) from port Y of cell elevator_controller.$sub$rtl/elevator_controller.v:122$342 ($sub).
+Removed top 30 bits (of 32) from port B of cell elevator_controller.$sub$rtl/elevator_controller.v:122$343 ($sub).
+Removed top 29 bits (of 32) from port Y of cell elevator_controller.$sub$rtl/elevator_controller.v:122$343 ($sub).
+
+2.10. Executing PEEPOPT pass (run peephole optimizers).
+
+2.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+
+2.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module elevator_controller:
+  creating $macc model for $add$rtl/elevator_controller.v:249$353 ($add).
+  creating $macc model for $add$rtl/elevator_controller.v:253$356 ($add).
+  creating $macc model for $add$rtl/elevator_controller.v:264$358 ($add).
+  creating $macc model for $neg$rtl/elevator_controller.v:0$103 ($neg).
+  creating $macc model for $sub$rtl/elevator_controller.v:122$312 ($sub).
+  creating $macc model for $sub$rtl/elevator_controller.v:122$322 ($sub).
+  creating $macc model for $sub$rtl/elevator_controller.v:122$323 ($sub).
+  creating $macc model for $sub$rtl/elevator_controller.v:122$332 ($sub).
+  creating $macc model for $sub$rtl/elevator_controller.v:122$333 ($sub).
+  creating $macc model for $sub$rtl/elevator_controller.v:122$342 ($sub).
+  creating $macc model for $sub$rtl/elevator_controller.v:122$343 ($sub).
+  creating $macc model for $sub$rtl/elevator_controller.v:251$355 ($sub).
+  creating $alu model for $macc $sub$rtl/elevator_controller.v:251$355.
+  creating $alu model for $macc $sub$rtl/elevator_controller.v:122$343.
+  creating $alu model for $macc $sub$rtl/elevator_controller.v:122$342.
+  creating $alu model for $macc $sub$rtl/elevator_controller.v:122$333.
+  creating $alu model for $macc $sub$rtl/elevator_controller.v:122$332.
+  creating $alu model for $macc $sub$rtl/elevator_controller.v:122$323.
+  creating $alu model for $macc $sub$rtl/elevator_controller.v:122$322.
+  creating $alu model for $macc $sub$rtl/elevator_controller.v:122$312.
+  creating $alu model for $macc $neg$rtl/elevator_controller.v:0$103.
+  creating $alu model for $macc $add$rtl/elevator_controller.v:264$358.
+  creating $alu model for $macc $add$rtl/elevator_controller.v:253$356.
+  creating $alu model for $macc $add$rtl/elevator_controller.v:249$353.
+  creating $alu model for $gt$rtl/elevator_controller.v:122$311 ($gt): merged with $sub$rtl/elevator_controller.v:122$312.
+  creating $alu model for $gt$rtl/elevator_controller.v:122$321 ($gt): merged with $sub$rtl/elevator_controller.v:122$322.
+  creating $alu model for $gt$rtl/elevator_controller.v:122$331 ($gt): merged with $sub$rtl/elevator_controller.v:122$332.
+  creating $alu model for $gt$rtl/elevator_controller.v:122$341 ($gt): merged with $sub$rtl/elevator_controller.v:122$342.
+  creating $alu model for $gt$rtl/elevator_controller.v:233$348 ($gt): new $alu
+  creating $alu model for $lt$rtl/elevator_controller.v:103$243 ($lt): merged with $sub$rtl/elevator_controller.v:122$312.
+  creating $alu model for $lt$rtl/elevator_controller.v:103$246 ($lt): merged with $sub$rtl/elevator_controller.v:122$322.
+  creating $alu model for $lt$rtl/elevator_controller.v:103$249 ($lt): merged with $sub$rtl/elevator_controller.v:122$332.
+  creating $alu model for $lt$rtl/elevator_controller.v:103$252 ($lt): merged with $sub$rtl/elevator_controller.v:122$342.
+  creating $alu model for $lt$rtl/elevator_controller.v:123$315 ($lt): new $alu
+  creating $alu model for $lt$rtl/elevator_controller.v:123$325 ($lt): new $alu
+  creating $alu model for $lt$rtl/elevator_controller.v:123$335 ($lt): new $alu
+  creating $alu model for $lt$rtl/elevator_controller.v:123$345 ($lt): new $alu
+  creating $alu cell for $lt$rtl/elevator_controller.v:123$345: $auto$alumacc.cc:485:replace_alu$1667
+  creating $alu cell for $lt$rtl/elevator_controller.v:123$335: $auto$alumacc.cc:485:replace_alu$1674
+  creating $alu cell for $lt$rtl/elevator_controller.v:123$325: $auto$alumacc.cc:485:replace_alu$1681
+  creating $alu cell for $lt$rtl/elevator_controller.v:123$315: $auto$alumacc.cc:485:replace_alu$1694
+  creating $alu cell for $gt$rtl/elevator_controller.v:233$348: $auto$alumacc.cc:485:replace_alu$1707
+  creating $alu cell for $add$rtl/elevator_controller.v:253$356: $auto$alumacc.cc:485:replace_alu$1718
+  creating $alu cell for $add$rtl/elevator_controller.v:264$358: $auto$alumacc.cc:485:replace_alu$1721
+  creating $alu cell for $neg$rtl/elevator_controller.v:0$103: $auto$alumacc.cc:485:replace_alu$1724
+  creating $alu cell for $sub$rtl/elevator_controller.v:122$312, $gt$rtl/elevator_controller.v:122$311, $lt$rtl/elevator_controller.v:103$243: $auto$alumacc.cc:485:replace_alu$1727
+  creating $alu cell for $add$rtl/elevator_controller.v:249$353: $auto$alumacc.cc:485:replace_alu$1738
+  creating $alu cell for $sub$rtl/elevator_controller.v:122$322, $gt$rtl/elevator_controller.v:122$321, $lt$rtl/elevator_controller.v:103$246: $auto$alumacc.cc:485:replace_alu$1741
+  creating $alu cell for $sub$rtl/elevator_controller.v:122$332, $gt$rtl/elevator_controller.v:122$331, $lt$rtl/elevator_controller.v:103$249: $auto$alumacc.cc:485:replace_alu$1752
+  creating $alu cell for $sub$rtl/elevator_controller.v:122$333: $auto$alumacc.cc:485:replace_alu$1763
+  creating $alu cell for $sub$rtl/elevator_controller.v:122$342, $gt$rtl/elevator_controller.v:122$341, $lt$rtl/elevator_controller.v:103$252: $auto$alumacc.cc:485:replace_alu$1766
+  creating $alu cell for $sub$rtl/elevator_controller.v:122$343: $auto$alumacc.cc:485:replace_alu$1777
+  creating $alu cell for $sub$rtl/elevator_controller.v:122$323: $auto$alumacc.cc:485:replace_alu$1780
+  creating $alu cell for $sub$rtl/elevator_controller.v:251$355: $auto$alumacc.cc:485:replace_alu$1783
+  created 17 $alu and 0 $macc cells.
+
+2.13. Executing SHARE pass (SAT-based resource sharing).
+
+2.14. Executing OPT pass (performing simple optimizations).
+
+2.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+<suppressed ~8 debug messages>
+
+2.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+Removed a total of 0 cells.
+
+2.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \elevator_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~23 debug messages>
+
+2.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \elevator_controller.
+Performed a total of 0 changes.
+
+2.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+Removed a total of 0 cells.
+
+2.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+Removed 2 unused cells and 15 unused wires.
+<suppressed ~3 debug messages>
+
+2.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+
+2.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+2.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \elevator_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~23 debug messages>
+
+2.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \elevator_controller.
+Performed a total of 0 changes.
+
+2.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+Removed a total of 0 cells.
+
+2.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+
+2.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+
+2.14.16. Finished OPT passes. (There is nothing left to do.)
+
+2.15. Executing MEMORY pass.
+
+2.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+2.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+2.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+2.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+2.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+2.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+
+2.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+2.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+2.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+
+2.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+
+2.17. Executing OPT pass (performing simple optimizations).
+
+2.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+<suppressed ~41 debug messages>
+
+2.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+<suppressed ~6 debug messages>
+Removed a total of 2 cells.
+
+2.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+Removed 1 unused cells and 32 unused wires.
+<suppressed ~2 debug messages>
+
+2.17.5. Finished fast OPT passes.
+
+2.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+2.19. Executing OPT pass (performing simple optimizations).
+
+2.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+
+2.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+Removed a total of 0 cells.
+
+2.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \elevator_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~20 debug messages>
+
+2.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \elevator_controller.
+    Consolidated identical input bits for $mux cell $ternary$rtl/elevator_controller.v:122$314:
+      Old ports: A={ $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [1:0] }, B={ 30'000000000000000000000000000000 \current_floor }, Y={ $ternary$rtl/elevator_controller.v:122$314_Y [31:1] $auto$alumacc.cc:501:replace_alu$1695 [0] }
+      New ports: A={ $sub$rtl/elevator_controller.v:122$312_Y [31] $sub$rtl/elevator_controller.v:122$312_Y [1:0] }, B={ 1'0 \current_floor }, Y={ $ternary$rtl/elevator_controller.v:122$314_Y [2:1] $auto$alumacc.cc:501:replace_alu$1695 [0] }
+      New connections: $ternary$rtl/elevator_controller.v:122$314_Y [31:3] = { $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2] }
+    Consolidated identical input bits for $mux cell $ternary$rtl/elevator_controller.v:122$324:
+      Old ports: A={ $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [1] $auto$alumacc.cc:501:replace_alu$1764 [0] }, B={ $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [1:0] }, Y=$ternary$rtl/elevator_controller.v:122$324_Y
+      New ports: A={ $sub$rtl/elevator_controller.v:122$322_Y [31] $sub$rtl/elevator_controller.v:122$322_Y [1] $auto$alumacc.cc:501:replace_alu$1764 [0] }, B={ $sub$rtl/elevator_controller.v:122$323_Y [31] $sub$rtl/elevator_controller.v:122$323_Y [1:0] }, Y=$ternary$rtl/elevator_controller.v:122$324_Y [2:0]
+      New connections: $ternary$rtl/elevator_controller.v:122$324_Y [31:3] = { $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2] }
+    Consolidated identical input bits for $mux cell $ternary$rtl/elevator_controller.v:122$334:
+      Old ports: A={ $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [1:0] }, B={ $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [1] \current_floor [0] }, Y=$ternary$rtl/elevator_controller.v:122$334_Y
+      New ports: A={ $sub$rtl/elevator_controller.v:122$332_Y [31] $sub$rtl/elevator_controller.v:122$332_Y [1:0] }, B={ $sub$rtl/elevator_controller.v:122$333_Y [31] $sub$rtl/elevator_controller.v:122$333_Y [1] \current_floor [0] }, Y=$ternary$rtl/elevator_controller.v:122$334_Y [2:0]
+      New connections: $ternary$rtl/elevator_controller.v:122$334_Y [31:3] = { $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2] }
+    Consolidated identical input bits for $mux cell $ternary$rtl/elevator_controller.v:122$344:
+      Old ports: A={ 30'000000000000000000000000000000 $auto$rtlil.cc:2401:Not$1789 $auto$alumacc.cc:501:replace_alu$1764 [0] }, B={ $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [1:0] }, Y=$ternary$rtl/elevator_controller.v:122$344_Y
+      New ports: A={ 1'0 $auto$rtlil.cc:2401:Not$1789 $auto$alumacc.cc:501:replace_alu$1764 [0] }, B={ $sub$rtl/elevator_controller.v:122$343_Y [31] $sub$rtl/elevator_controller.v:122$343_Y [1:0] }, Y=$ternary$rtl/elevator_controller.v:122$344_Y [2:0]
+      New connections: $ternary$rtl/elevator_controller.v:122$344_Y [31:3] = { $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] $ternary$rtl/elevator_controller.v:122$344_Y [2] }
+  Optimizing cells in module \elevator_controller.
+    Consolidated identical input bits for $mux cell $procmux$611:
+      Old ports: A={ $ternary$rtl/elevator_controller.v:122$314_Y [31:1] $auto$alumacc.cc:501:replace_alu$1695 [0] }, B=5, Y=$5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316
+      New ports: A={ $ternary$rtl/elevator_controller.v:122$314_Y [2] $ternary$rtl/elevator_controller.v:122$314_Y [2:1] $auto$alumacc.cc:501:replace_alu$1695 [0] }, B=4'0101, Y=$5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3:0]
+      New connections: $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [31:4] = { $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] $5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3] }
+  Optimizing cells in module \elevator_controller.
+    Consolidated identical input bits for $mux cell $procmux$641:
+      Old ports: A=5, B=$5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316, Y=$4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308
+      New ports: A=4'0101, B=$5\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$316 [3:0], Y=$4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3:0]
+      New connections: $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [31:4] = { $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] $4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3] }
+  Optimizing cells in module \elevator_controller.
+    Consolidated identical input bits for $mux cell $procmux$535:
+      Old ports: A=$ternary$rtl/elevator_controller.v:122$324_Y, B=$4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308, Y=$7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326
+      New ports: A={ $ternary$rtl/elevator_controller.v:122$324_Y [2] $ternary$rtl/elevator_controller.v:122$324_Y [2:0] }, B=$4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3:0], Y=$7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3:0]
+      New connections: $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [31:4] = { $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] $7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3] }
+  Optimizing cells in module \elevator_controller.
+    Consolidated identical input bits for $mux cell $procmux$565:
+      Old ports: A=$4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308, B=$7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326, Y=$6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318
+      New ports: A=$4\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$308 [3:0], B=$7\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$326 [3:0], Y=$6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3:0]
+      New connections: $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [31:4] = { $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] $6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3] }
+  Optimizing cells in module \elevator_controller.
+    Consolidated identical input bits for $mux cell $procmux$459:
+      Old ports: A=$6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318, B=$ternary$rtl/elevator_controller.v:122$334_Y, Y=$9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336
+      New ports: A=$6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3:0], B={ $ternary$rtl/elevator_controller.v:122$334_Y [2] $ternary$rtl/elevator_controller.v:122$334_Y [2:0] }, Y=$9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3:0]
+      New connections: $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [31:4] = { $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] $9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3] }
+  Optimizing cells in module \elevator_controller.
+    Consolidated identical input bits for $mux cell $procmux$489:
+      Old ports: A=$6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318, B=$9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336, Y=$8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328
+      New ports: A=$6\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$318 [3:0], B=$9\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$336 [3:0], Y=$8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3:0]
+      New connections: $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [31:4] = { $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] $8\nearest_floor$func$rtl/elevator_controller.v:233$25.best_dist[31:0]$328 [3] }
+  Optimizing cells in module \elevator_controller.
+Performed a total of 10 changes.
+
+2.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+Removed a total of 0 cells.
+
+2.19.6. Executing OPT_SHARE pass.
+    Found cells that share an operand and can be merged by moving the $mux $procmux$885 in front of them:
+        $auto$alumacc.cc:485:replace_alu$1738
+        $auto$alumacc.cc:485:replace_alu$1783
+
+2.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+Removed 0 unused cells and 6 unused wires.
+<suppressed ~1 debug messages>
+
+2.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+<suppressed ~2 debug messages>
+
+2.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+2.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \elevator_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~20 debug messages>
+
+2.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \elevator_controller.
+    Consolidated identical input bits for $mux cell $auto$opt_share.cc:244:merge_operators$1801:
+      Old ports: A=2'11, B=2'01, Y=$auto$rtlil.cc:2498:Mux$1802
+      New ports: A=1'1, B=1'0, Y=$auto$rtlil.cc:2498:Mux$1802 [1]
+      New connections: $auto$rtlil.cc:2498:Mux$1802 [0] = 1'1
+  Optimizing cells in module \elevator_controller.
+Performed a total of 1 changes.
+
+2.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+Removed a total of 0 cells.
+
+2.19.14. Executing OPT_SHARE pass.
+
+2.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+2.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+<suppressed ~1 debug messages>
+
+2.19.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+2.19.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \elevator_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~19 debug messages>
+
+2.19.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \elevator_controller.
+Performed a total of 0 changes.
+
+2.19.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+Removed a total of 0 cells.
+
+2.19.22. Executing OPT_SHARE pass.
+
+2.19.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.19.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+
+2.19.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+
+2.19.26. Finished OPT passes. (There is nothing left to do.)
+
+2.20. Executing TECHMAP pass (map to technology primitives).
+
+2.20.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+2.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $logic_and.
+Using template $paramod$b3c20b05d9b1fc2c940ef2f6c917486aead042e8\_90_alu for cells of type $alu.
+Using template $paramod$5b0ede14b4db92d138787fe354258a10340a14bd\_90_alu for cells of type $alu.
+Using template $paramod$constmap:b6d5011a111b4ca40e652509ef75e544f6e863e2$paramod$7f1320bf706f65f3ab57d088c03383e114ba1a8e\_90_shift_shiftx for cells of type $shift.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 0 of port A: 1'0
+Creating constmapped module `$paramod$constmap:9765f9dcdfc0f6ca1c3e550e5cfd8c586a7470af$paramod$7f1320bf706f65f3ab57d088c03383e114ba1a8e\_90_shift_shiftx'.
+
+2.20.12. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:9765f9dcdfc0f6ca1c3e550e5cfd8c586a7470af$paramod$7f1320bf706f65f3ab57d088c03383e114ba1a8e\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$1970.
+    dead port 2/2 on $mux $procmux$1964.
+    dead port 2/2 on $mux $procmux$1958.
+Removed 3 multiplexer ports.
+<suppressed ~345 debug messages>
+
+2.20.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:9765f9dcdfc0f6ca1c3e550e5cfd8c586a7470af$paramod$7f1320bf706f65f3ab57d088c03383e114ba1a8e\_90_shift_shiftx.
+<suppressed ~35 debug messages>
+Removed 55 unused cells and 69 unused wires.
+Using template $paramod$constmap:9765f9dcdfc0f6ca1c3e550e5cfd8c586a7470af$paramod$7f1320bf706f65f3ab57d088c03383e114ba1a8e\_90_shift_shiftx for cells of type $shift.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using template $paramod$2653f68ddb8eab7b1907b4a20767b72a824a7a36\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $dff.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$constmap:1ef046be63c9541309f2f19c4ef998a798f64488$paramod$7fe1424d9d826b3a6286885bc851fafa5143be2b\_90_shift_shiftx for cells of type $shiftx.
+Using template $paramod$7e708ae28ab761f11d0fb59d3ffc72f6a4baf5d9\_90_alu for cells of type $alu.
+Using template $paramod$649fc39eef2451024566705288528c8671211199\_90_alu for cells of type $alu.
+Using template $paramod$1d1e68f77481583066c6d429218f48ea9d5739b3\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $mux.
+Using template $paramod$a6d3536e638f739207e3b49a2e88fb3fe44416ec\_90_alu for cells of type $alu.
+Using template $paramod$7b16819b516a037d220ff7463dffc76498bbb23b\_90_alu for cells of type $alu.
+Using template $paramod$3ef7d3dd227da7627a99c5e5a6a4deb817573e39\_90_alu for cells of type $alu.
+Using template $paramod$9e8c19db10db5b8954224cafa0587db20bab09bd\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $sdff.
+Using template $paramod$97565c3687be688407d1272a293bd9d0ae6852dc\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $sdffe.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $ne.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000011111 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~1882 debug messages>
+
+2.21. Executing OPT pass (performing simple optimizations).
+
+2.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+<suppressed ~853 debug messages>
+
+2.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+<suppressed ~1911 debug messages>
+Removed a total of 637 cells.
+
+2.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+Removed 314 unused cells and 1112 unused wires.
+<suppressed ~315 debug messages>
+
+2.21.5. Finished fast OPT passes.
+
+2.22. Executing ABC pass (technology mapping using ABC).
+
+2.22.1. Extracting gate netlist of module `\elevator_controller' to `<abc-temp-dir>/input.blif'..
+Extracted 500 gates and 540 wires to a netlist network with 38 inputs and 33 outputs.
+
+2.22.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+2.22.1.2. Re-integrating ABC results.
+ABC RESULTS:              XNOR cells:        4
+ABC RESULTS:              NAND cells:       14
+ABC RESULTS:             ORNOT cells:        5
+ABC RESULTS:                OR cells:       57
+ABC RESULTS:               AND cells:        6
+ABC RESULTS:            ANDNOT cells:       85
+ABC RESULTS:               NOR cells:       37
+ABC RESULTS:               NOT cells:       27
+ABC RESULTS:               MUX cells:       64
+ABC RESULTS:               XOR cells:       11
+ABC RESULTS:        internal signals:      469
+ABC RESULTS:           input signals:       38
+ABC RESULTS:          output signals:       33
+Removing temp directory.
+
+2.23. Executing OPT pass (performing simple optimizations).
+
+2.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module elevator_controller.
+<suppressed ~10 debug messages>
+
+2.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\elevator_controller'.
+<suppressed ~39 debug messages>
+Removed a total of 13 cells.
+
+2.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \elevator_controller..
+Removed 1 unused cells and 365 unused wires.
+<suppressed ~3 debug messages>
+
+2.23.5. Finished fast OPT passes.
+
+2.24. Executing HIERARCHY pass (managing design hierarchy).
+
+2.24.1. Analyzing design hierarchy..
+Top module:  \elevator_controller
+
+2.24.2. Analyzing design hierarchy..
+Top module:  \elevator_controller
+Removed 0 unused modules.
+
+2.25. Printing statistics.
+
+=== elevator_controller ===
+
+   Number of wires:                314
+   Number of wire bits:            436
+   Number of public wires:          29
+   Number of public wire bits:     138
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                324
+     $_ANDNOT_                      83
+     $_AND_                          4
+     $_DFF_P_                        3
+     $_MUX_                         64
+     $_NAND_                        12
+     $_NOR_                         37
+     $_NOT_                         26
+     $_ORNOT_                        5
+     $_OR_                          50
+     $_SDFFE_PN0P_                  11
+     $_SDFF_PN0_                    14
+     $_XNOR_                         4
+     $_XOR_                         11
+
+2.26. Executing CHECK pass (checking for obvious problems).
+Checking module elevator_controller...
+Found and reported 0 problems.
+
+3. Printing statistics.
+
+=== elevator_controller ===
+
+   Number of wires:                314
+   Number of wire bits:            436
+   Number of public wires:          29
+   Number of public wire bits:     138
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                324
+     $_ANDNOT_                      83
+     $_AND_                          4
+     $_DFF_P_                        3
+     $_MUX_                         64
+     $_NAND_                        12
+     $_NOR_                         37
+     $_NOT_                         26
+     $_ORNOT_                        5
+     $_OR_                          50
+     $_SDFFE_PN0P_                  11
+     $_SDFF_PN0_                    14
+     $_XNOR_                         4
+     $_XOR_                         11
+
+4. Executing Verilog backend.
+
+4.1. Executing BMUXMAP pass.
+
+4.2. Executing DEMUXMAP pass.
+Dumping module `\elevator_controller'.
+
+End of script. Logfile hash: 9ab57cc3f7, CPU: user 0.68s system 0.00s, MEM: 28.12 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 28% 32x opt_expr (0 sec), 13% 23x opt_clean (0 sec), ...

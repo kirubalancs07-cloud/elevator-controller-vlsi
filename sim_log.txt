@@ -1,0 +1,29 @@
+VCD info: dumpfile elevator.vcd opened for output.
+
+[TEST 1] Reset: expect floor 1 (idx0), door closed, idle
+  [ OK ] floor=1 door_closed idle
+
+[TEST 2] Single cabin request -> Floor 3
+  [ OK ] reached floor 3 at t=165000
+  [ OK ] door opened at Floor 3
+
+[TEST 3] Simultaneous requests: cabin->F4, cabin->F1, hall_up->F2
+  [ OK ] reached floor 4 at t=310000
+  [ OK ] reached floor 2 at t=475000
+  [ OK ] reached floor 1 at t=775000
+  [INFO] all three requests serviced without reversing more than needed
+
+[TEST 4] Boundary: request Floor 4 hall_up should be ignored physically (already top)
+  [ OK ] reached floor 4 at t=1025000
+  [ OK ] current_floor stayed within range (4)
+
+[TEST 5] Hall_down at Floor 2 while car travels up from Floor1 to Floor4
+  [ OK ] reached floor 1 at t=1130000
+  [ OK ] reached floor 4 at t=1365000
+  [INFO] hall_down_req at floor2 remains pending: 1 (serviced on the way back down)
+
+===================================
+ALL TESTS PASSED
+===================================
+
+tb/elevator_tb.v:187: $finish called at 1665000 (1ps)
